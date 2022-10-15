@@ -39,5 +39,7 @@ namespace Clerus.GridRectangles.Core.Services
         public bool CheckRectanglesXPositionIfBeyondGrid(List<GridRectangle> rectangles) => rectangles.Any(rectangle => (rectangle.Position.X + rectangle.Width) > Grid.Width);
 
         public bool CheckRectanglesYPositionIfBeyondGrid(List<GridRectangle> rectangles) => rectangles.Any(rectangle => (rectangle.Position.Y + rectangle.Height) > Grid.Height);
+
+        public GridRectangle? FindGridRectangle(Position position) => _grid.Rectangles?.Where(a => a.Position?.X == position.X && a.Position?.Y == position.Y).FirstOrDefault();
     }
 }
