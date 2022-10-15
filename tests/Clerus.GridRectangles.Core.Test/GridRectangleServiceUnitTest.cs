@@ -177,5 +177,80 @@ namespace Clerus.GridRectangles.Core.Test
             Assert.True(result);
             Assert.True(service.Grid.Rectangles.Count > 0);
         }
+
+
+        [Fact]
+        public void GridRectangleService_FindGridRectangle_ReturnNotNull()
+        {
+            // arrange
+            var gridHeight = 25;
+            var gridWidth = 25;
+            var grid = MockGrid(gridHeight, gridWidth);
+            var service = new GridRectangleService(grid.Object);
+
+            var rectangle1 = new GridRectangle(
+                height: 2,
+                width: 2,
+                position: new Position { X = 0, Y = 0 });
+
+            var rectangle2 = new GridRectangle(
+                height: 3,
+                width: 3,
+                position: new Position { X = 1, Y = 1 });
+
+            var rectangles = new List<GridRectangle>
+            {
+               rectangle1,
+               rectangle2
+            };
+
+            var addRectanglesResult = service.AddRectangles(rectangles);
+
+            var searchPosition = new Position { X = 0,  Y = 0 };
+
+            // act
+            var result = service.FindGridRectangle(searchPosition);
+
+            // assert
+            Assert.NotNull(result);
+            Assert.Equal(searchPosition.X, result?.Position.X);
+            Assert.Equal(searchPosition.Y, result?.Position.Y);
+        }
+
+        [Fact]
+        public void GridRectangleService_FindGridRectangle_ReturnNull()
+        {
+            // arrange
+            var gridHeight = 25;
+            var gridWidth = 25;
+            var grid = MockGrid(gridHeight, gridWidth);
+            var service = new GridRectangleService(grid.Object);
+
+            var rectangle1 = new GridRectangle(
+                height: 2,
+                width: 2,
+                position: new Position { X = 0, Y = 0 });
+
+            var rectangle2 = new GridRectangle(
+                height: 3,
+                width: 3,
+                position: new Position { X = 1, Y = 1 });
+
+            var rectangles = new List<GridRectangle>
+            {
+               rectangle1,
+               rectangle2
+            };
+
+            var addRectanglesResult = service.AddRectangles(rectangles);
+
+            var searchPosition = new Position { X = 3, Y = 5 };
+
+            // act
+            var result = service.FindGridRectangle(searchPosition);
+
+            // assert
+            Assert.Null(result);
+        }
     }
 }
