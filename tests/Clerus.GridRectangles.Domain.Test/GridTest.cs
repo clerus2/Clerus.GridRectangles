@@ -1,3 +1,6 @@
+using Clerus.GridRectangles.Domain.Interfaces;
+using FlareExam.Domain.Models;
+using Moq;
 using Xunit;
 
 namespace FlareExam.Domain.Test
@@ -28,7 +31,6 @@ namespace FlareExam.Domain.Test
             // assert
             Assert.Equal(expected, valid);
         }
-
 
         //[Fact]
         //public void Grid_WhenHasValidDimensions_ReturnPassed()

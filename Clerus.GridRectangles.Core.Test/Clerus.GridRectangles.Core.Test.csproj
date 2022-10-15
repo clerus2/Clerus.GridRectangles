@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -22,7 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Clerus.GridRectangles.Domain\Clerus.GridRectangles.Domain.csproj" />
+    <ProjectReference Include="..\Clerus.GridRectangles.Core\Clerus.GridRectangles.Core.csproj" />
+    <ProjectReference Include="..\src\Clerus.GridRectangles.Domain\Clerus.GridRectangles.Domain.csproj" />
   </ItemGroup>
 
 </Project>
