@@ -178,7 +178,6 @@ namespace Clerus.GridRectangles.Core.Test
             Assert.True(service.Grid.Rectangles.Count > 0);
         }
 
-
         [Fact]
         public void GridRectangleService_FindGridRectangle_ReturnNotNull()
         {
@@ -251,6 +250,48 @@ namespace Clerus.GridRectangles.Core.Test
 
             // assert
             Assert.Null(result);
+        }
+
+        [Theory]
+        [InlineData(0, 0, 1)]
+        [InlineData(2, 2, 1)]
+        [InlineData(2, 3, 2)]
+        [InlineData(10, 10, 1)]
+        [InlineData(13, 13, 1)]
+        [InlineData(2, 13, 2)]
+        public void GridRectangleService_RemoveGridRectangle_ReturnPassed(int x, int y, int expectedCount)
+        {
+            // arrange
+            var gridHeight = 25;
+            var gridWidth = 25;
+            var grid = MockGrid(gridHeight, gridWidth);
+            var service = new GridRectangleService(grid.Object);
+
+            var rectangle1 = new GridRectangle(
+                height: 2,
+                width: 2,
+                position: new Position { X = 0, Y = 0 });
+
+            var rectangle2 = new GridRectangle(
+                height: 3,
+                width: 3,
+                position: new Position { X = 10, Y = 10 });
+
+            var rectangles = new List<GridRectangle>
+            {
+               rectangle1,
+               rectangle2
+            };
+
+            service.AddRectangles(rectangles);
+
+            var deletePosition = new Position { X = x, Y = y };
+
+            // act
+            service.RemoveGridRectangle(deletePosition);
+
+            // assert
+            Assert.Equal(expectedCount, service.Grid.Rectangles.Count);
         }
     }
 }

@@ -15,5 +15,7 @@ namespace Clerus.GridRectangles.Core.Interfaces
         public bool CheckRectanglesYPositionIfBeyondGrid(List<GridRectangle> rectangles);
 
         public GridRectangle? FindGridRectangle(Position position);
+
+        public void RemoveGridRectangle(Position position);
     }
 }
