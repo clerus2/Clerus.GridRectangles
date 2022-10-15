@@ -21,17 +21,23 @@ namespace Clerus.GridRectangles.Core.Services
 
             if (rectangles is null || rectangles.Count is 0) return false;
 
-            foreach (var rectangle in rectangles) {
+            if (CheckRectanglesIfContainsNegativePosition(rectangles)) return false;
 
-                // validate coordinate
+            if (CheckRectanglesXPositionIfBeyondGrid(rectangles)) return false;
 
-                // add
-                _grid.Rectangles.Add(rectangle);
-            }
+            if (CheckRectanglesYPositionIfBeyondGrid(rectangles)) return false;
+
+            _grid.Rectangles.AddRange(rectangles);
 
             return true;
         }
 
         public bool HasValidGrid() => _grid.IsValid();
+
+        public bool CheckRectanglesIfContainsNegativePosition(List<GridRectangle> rectangles) => rectangles.Any(a => a.Position.X < 0 || a.Position.Y < 0);
+
+        public bool CheckRectanglesXPositionIfBeyondGrid(List<GridRectangle> rectangles) => rectangles.Any(rectangle => (rectangle.Position.X + rectangle.Width) > Grid.Width);
+
+        public bool CheckRectanglesYPositionIfBeyondGrid(List<GridRectangle> rectangles) => rectangles.Any(rectangle => (rectangle.Position.Y + rectangle.Height) > Grid.Height);
     }
 }

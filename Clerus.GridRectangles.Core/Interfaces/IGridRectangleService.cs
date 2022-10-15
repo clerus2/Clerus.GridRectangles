@@ -1,9 +1,4 @@
 ﻿using Clerus.GridRectangles.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Clerus.GridRectangles.Core.Interfaces
 {
@@ -12,5 +7,11 @@ namespace Clerus.GridRectangles.Core.Interfaces
         public bool HasValidGrid();
 
         public bool AddRectangles(List<GridRectangle> rectangles);
+
+        public bool CheckRectanglesIfContainsNegativePosition(List<GridRectangle> rectangles);
+
+        public bool CheckRectanglesXPositionIfBeyondGrid(List<GridRectangle> rectangles);
+
+        public bool CheckRectanglesYPositionIfBeyondGrid(List<GridRectangle> rectangles);
     }
 }
