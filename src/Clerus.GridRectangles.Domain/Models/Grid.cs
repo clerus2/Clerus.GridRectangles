@@ -1,4 +1,7 @@
-﻿namespace FlareExam.Domain
+﻿using Clerus.GridRectangles.Domain.Interfaces;
+using Clerus.GridRectangles.Domain.Models;
+
+namespace FlareExam.Domain.Models
 {
     public class Grid
     {
@@ -11,11 +14,14 @@
 
         public int Width { get { return _width; } }
 
+        public List<GridRectangle>? Rectangles { get; set; }
+
         public Grid(int height, int width)
         {
             _height = height;
             _width = width;
         }
+
         public bool IsValid() => ValidateHeight() && ValidateWidth();
         
         private bool ValidateHeight() => _height >= minHeightWidth && _height <= maxHeightWidth;
