@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Clerus.GridRectangles.Core\Clerus.GridRectangles.Core.csproj" />
-    <ProjectReference Include="..\src\Clerus.GridRectangles.Domain\Clerus.GridRectangles.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Clerus.GridRectangles.Core\Clerus.GridRectangles.Core.csproj" />
+    <ProjectReference Include="..\..\src\Clerus.GridRectangles.Domain\Clerus.GridRectangles.Domain.csproj" />
   </ItemGroup>
 
 </Project>
