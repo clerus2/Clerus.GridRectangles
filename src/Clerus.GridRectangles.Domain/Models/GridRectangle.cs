@@ -2,13 +2,15 @@
 {
     public class GridRectangle: Rectangle
     {
-        private readonly Coordinate _coordinate;
+        private readonly Position _position;
 
-        public GridRectangle(Coordinate coordinate, int height, int width)
+        public Position Position { get { return _position; } }
+
+        public GridRectangle(int height, int width, Position position)
         {
             this.Height = height;
             this.Width = width;
-            _coordinate = coordinate;
+            _position = position;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clerus.GridRectangles.Domain.Models
 {
-    public class Coordinate
+    public class Position
     {
         public int X { get; set; }
             

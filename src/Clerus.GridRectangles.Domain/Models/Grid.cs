@@ -14,12 +14,13 @@ namespace FlareExam.Domain.Models
 
         public int Width { get { return _width; } }
 
-        public List<GridRectangle>? Rectangles { get; set; }
+        public List<GridRectangle> Rectangles { get; set; }
 
         public Grid(int height, int width)
         {
             _height = height;
             _width = width;
+            Rectangles = new List<GridRectangle>();
         }
 
         public bool IsValid() => ValidateHeight() && ValidateWidth();
