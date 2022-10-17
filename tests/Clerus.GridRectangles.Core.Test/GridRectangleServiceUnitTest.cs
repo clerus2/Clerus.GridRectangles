@@ -1,4 +1,5 @@
 using Clerus.GridRectangles.Core.Services;
+using Clerus.GridRectangles.Core.Test.Data;
 using Clerus.GridRectangles.Domain.Models;
 using FlareExam.Domain.Models;
 using Moq;
@@ -9,7 +10,7 @@ namespace Clerus.GridRectangles.Core.Test
 {
     public class GridRectangleServiceUnitTest
     {
-        private Mock<Grid> MockGrid(int height, int width) 
+        private Mock<Grid> MockGrid(int height, int width)
         {
             return new Mock<Grid>(height, width);
         }
@@ -38,7 +39,7 @@ namespace Clerus.GridRectangles.Core.Test
 
             // assert
             Assert.NotNull(grid.Object);
-            Assert.Equal(expected,result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -162,7 +163,7 @@ namespace Clerus.GridRectangles.Core.Test
             var rectangle2 = new GridRectangle(
                 height: 3,
                 width: 3,
-                position: new Position { X = 1, Y = 1 });
+                position: new Position { X = 5, Y = 5 });
 
             var rectangles = new List<GridRectangle>
             {
@@ -195,7 +196,7 @@ namespace Clerus.GridRectangles.Core.Test
             var rectangle2 = new GridRectangle(
                 height: 3,
                 width: 3,
-                position: new Position { X = 1, Y = 1 });
+                position: new Position { X = 5, Y = 5 });
 
             var rectangles = new List<GridRectangle>
             {
@@ -205,7 +206,7 @@ namespace Clerus.GridRectangles.Core.Test
 
             var addRectanglesResult = service.AddRectangles(rectangles);
 
-            var searchPosition = new Position { X = 0,  Y = 0 };
+            var searchPosition = new Position { X = 0, Y = 0 };
 
             // act
             var result = service.FindGridRectangle(searchPosition);
@@ -292,6 +293,57 @@ namespace Clerus.GridRectangles.Core.Test
 
             // assert
             Assert.Equal(expectedCount, service.Grid.Rectangles.Count);
+        }
+
+        [Theory]
+        [ClassData(typeof(HasOverlapRectangleOnRightData))]
+        public void GridRectangleService_CheckRectangleOverlapOnRight_ReturnTrue(List<GridRectangle> rectangles)
+        {
+            // arrange
+            var gridHeight = 25;
+            var gridWidth = 25;
+            var grid = MockGrid(gridHeight, gridWidth);
+            var service = new GridRectangleService(grid.Object);
+
+            // act
+            var result = service.CheckRectangleOverlap(rectangles);
+
+            // assert
+            Assert.True(result);
+        }
+
+        [Theory]
+        [ClassData(typeof(HasOverlapRectangleOnLeftData))]
+        public void GridRectangleService_CheckRectangleOverlapOnLeft_ReturnTrue(List<GridRectangle> rectangles)
+        {
+            // arrange
+            var gridHeight = 25;
+            var gridWidth = 25;
+            var grid = MockGrid(gridHeight, gridWidth);
+            var service = new GridRectangleService(grid.Object);
+
+            // act
+            var result = service.CheckRectangleOverlap(rectangles);
+
+            // assert
+            Assert.True(result);
+        }
+
+        [Theory]
+        [ClassData(typeof(HasNoOverlapRectangleData))]
+        public void GridRectangleService_CheckRectangleOverlap_ReturnFalse(List<GridRectangle> rectangles)
+        {
+            // arrange
+            var gridHeight = 25;
+            var gridWidth = 25;
+            var grid = MockGrid(gridHeight, gridWidth);
+            var service = new GridRectangleService(grid.Object);
+
+            // act
+            var result = service.CheckRectangleOverlap(rectangles);
+
+            // assert
+            Assert.False(result);
         }
     }
 }
